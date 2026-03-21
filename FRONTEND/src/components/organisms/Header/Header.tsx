@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../atoms/Button';
+import { Logo } from '../../atoms/Logo';
 import { useAuthStore } from '../../../store/authStore';
 import styles from './Header.module.css';
 
@@ -10,8 +11,7 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.brandBlock}>
-        <span className={styles.kicker}>Admin Suite</span>
-        <strong className={styles.brand}>Pulse Workspace</strong>
+        <Logo size="sm" />
       </div>
       <div className={styles.actions}>
         <div className={styles.userCard}>
@@ -22,7 +22,7 @@ export const Header = () => {
           <Link to="/profile" className={styles.link}>
             Mi perfil
           </Link>
-          <Button label="Cerrar sesion" variant="ghost" onClick={() => void logout()} />
+          <Button label="Salir del parche" variant="ghost" onClick={() => void logout()} />
         </nav>
       </div>
     </header>

@@ -1,27 +1,21 @@
 import type { ReactNode } from 'react';
+import { Logo } from '../../atoms/Logo';
 import styles from './AuthLayout.module.css';
 
 export const AuthLayout = ({ title, children }: { title: string; children: ReactNode }) => (
   <main className={styles.page}>
     <section className={styles.hero}>
-      <span className={styles.eyebrow}>Workspace Access</span>
+      <span className={styles.eyebrow}>Coffee Parches</span>
       <h1 className={styles.title}>{title}</h1>
       <p className={styles.description}>
-        Accede a un panel moderno para gestionar usuarios, perfiles y formularios con una experiencia clara y consistente.
+        Tu espacio para conectar, conversar y crecer junto a quienes comparten tu energía.
       </p>
-      <div className={styles.metricRow}>
-        <div className={styles.metricCard}>
-          <strong>24/7</strong>
-          <span>Operación continua</span>
-        </div>
-        <div className={styles.metricCard}>
-          <strong>SSO</strong>
-          <span>Ingreso con Google</span>
-        </div>
-      </div>
     </section>
     <section className={styles.panel}>
       <div className={styles.panelGlow} aria-hidden="true" />
+      <div className={styles.panelLogoWrapper}>
+        <Logo size="lg" />
+      </div>
       <div className={styles.panelBody}>{children}</div>
     </section>
   </main>

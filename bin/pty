@@ -1,0 +1,239 @@
+#!/usr/bin/env bash
+
+# ─────────────────────────────────────────────
+#  bin/pty — Levanta / apaga COFEE-PARCHE
+# ─────────────────────────────────────────────
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+BACKEND="$ROOT/BACKEND"
+FRONTEND="$ROOT/FRONTEND"
+
+# ── Colores ───────────────────────────────────
+BOLD='\033[1m'
+DIM='\033[2m'
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+RESET='\033[0m'
+
+log()  { echo -e "${CYAN}${BOLD}[pty]${RESET} $*"; }
+ok()   { echo -e "${GREEN}${BOLD}[pty]${RESET} $*"; }
+warn() { echo -e "${YELLOW}${BOLD}[pty]${RESET} $*"; }
+err()  { echo -e "${RED}${BOLD}[pty]${RESET} $*" >&2; }
+
+# ── Helpers de compose ────────────────────────
+be() { docker compose -f "$BACKEND/docker-compose.yml"  "$@"; }
+fe() { docker compose -f "$FRONTEND/docker-compose.yml" "$@"; }
+
+# ── Verificar docker ──────────────────────────
+check_docker() {
+  if ! command -v docker &>/dev/null; then
+    err "Docker no está instalado o no está en el PATH."
+    exit 1
+  fi
+  if ! docker info &>/dev/null 2>&1; then
+    warn "Docker no está corriendo. Iniciando Docker Desktop…"
+    open -a Docker
+    echo -n "  Esperando"
+    until docker info &>/dev/null 2>&1; do
+      echo -n "."
+      sleep 2
+    done
+    echo " listo"
+  fi
+}
+
+# ── Visor de logs interactivo ─────────────────
+# Muestra logs de un servicio en foreground.
+# Ctrl+Z  → mata el proceso de logs y vuelve al menú
+# Ctrl+C  → sale del script por completo
+_LOG_PID=""
+_BACK_TO_MENU=0
+
+_watch_logs() {
+  local label="$1"; shift      # título a mostrar
+  local color="$1"; shift      # código de color ANSI
+  # resto de args = comando completo a ejecutar
+
+  _BACK_TO_MENU=0
+  _LOG_PID=""
+
+  clear
+  echo -e "${color}${BOLD}  ── $label ────────────────────────────────────${RESET}"
+  echo -e "${DIM}     Ctrl+Z → volver al menú   │   Ctrl+C → salir${RESET}"
+  echo -e "${color}${BOLD}  ────────────────────────────────────────────────${RESET}\n"
+
+  # Ctrl+Z: matar logs → activar flag → wait retorna → menú vuelve a aparecer
+  trap '_BACK_TO_MENU=1; [[ -n "$_LOG_PID" ]] && kill "$_LOG_PID" 2>/dev/null; _LOG_PID=""' TSTP
+  # Ctrl+C: salida limpia
+  trap '[[ -n "$_LOG_PID" ]] && kill "$_LOG_PID" 2>/dev/null; exit 0' INT
+
+  "$@" &
+  _LOG_PID=$!
+  wait "$_LOG_PID" 2>/dev/null || true
+  _LOG_PID=""
+
+  trap - TSTP INT
+}
+
+# ── Menú principal ────────────────────────────
+_menu() {
+  while true; do
+    clear
+    echo
+    echo -e "  ${CYAN}${BOLD}╔══════════════════════════════════╗${RESET}"
+    echo -e "  ${CYAN}${BOLD}║       C O F E E - P A R C H E    ║${RESET}"
+    echo -e "  ${CYAN}${BOLD}╚══════════════════════════════════╝${RESET}"
+    echo
+    echo -e "  ${BOLD}1${RESET}  ${GREEN}Rails${RESET}    — backend API   ${DIM}localhost:3000${RESET}"
+    echo -e "  ${BOLD}2${RESET}  ${BLUE}React${RESET}    — frontend       ${DIM}localhost:5173${RESET}"
+    echo -e "  ${BOLD}3${RESET}  ${MAGENTA}MariaDB${RESET}  — base de datos   ${DIM}localhost:3306${RESET}"
+    echo -e "  ${BOLD}4${RESET}  ${RED}Matar todos los procesos y salir${RESET}"
+    echo
+    echo -e "  ${DIM}── En la vista de logs ──────────────────${RESET}"
+    echo -e "  ${DIM}  Ctrl+Z  →  volver a este menú${RESET}"
+    echo -e "  ${DIM}  Ctrl+C  →  salir completamente${RESET}"
+    echo
+
+    _BACK_TO_MENU=0
+    # Ctrl+C en el menú sale del script
+    trap 'echo; exit 0' INT
+
+    read -rp "$(echo -e "  Elige una opción ${BOLD}[1-4]${RESET}: ")" choice
+
+    case "$choice" in
+      1)
+        _watch_logs "Rails — Backend" "$GREEN" \
+          docker compose -f "$BACKEND/docker-compose.yml" logs -f --tail=100
+        ;;
+      2)
+        _watch_logs "React — Frontend" "$BLUE" \
+          docker compose -f "$FRONTEND/docker-compose.yml" logs -f --tail=100
+        ;;
+      3)
+        _watch_logs "MariaDB" "$MAGENTA" \
+          docker compose -f "$BACKEND/docker-compose.yml" logs -f --tail=100 db
+        ;;
+      4)
+        echo
+        log "Deteniendo todos los servicios…"
+        fe down
+        be down
+        ok "Todo detenido. ¡Hasta luego!"
+        echo
+        exit 0
+        ;;
+      "")
+        continue
+        ;;
+      *)
+        echo -e "\n  ${RED}Opción inválida.${RESET} Elige entre 1 y 4."
+        sleep 1
+        ;;
+    esac
+  done
+}
+
+# ── Subcomandos de línea de comandos ──────────
+_cmd_up() {
+  log "Levantando backend  → http://localhost:3000"
+  be up -d --build
+  log "Levantando frontend → http://localhost:5173"
+  fe up -d
+  ok "Servicios corriendo."
+  echo
+  _menu
+}
+
+_cmd_menu() {
+  _menu
+}
+
+_cmd_down() {
+  log "Deteniendo frontend…"
+  fe down
+  log "Deteniendo backend…"
+  be down
+  ok "Todo detenido."
+}
+
+_cmd_restart() {
+  _cmd_down
+  echo
+  _cmd_up
+}
+
+_cmd_ps() {
+  echo -e "\n${BOLD}── Backend ──────────────────────────────${RESET}"
+  be ps
+  echo -e "\n${BOLD}── Frontend ─────────────────────────────${RESET}"
+  fe ps
+  echo
+}
+
+_cmd_build() {
+  log "Reconstruyendo imágenes sin cache…"
+  be build --no-cache
+  fe build --no-cache
+  ok "Build completado."
+}
+
+_cmd_backend() {
+  [[ $# -eq 0 ]] && { err "Ej: bin/pty backend rails console"; exit 1; }
+  be exec web "$@"
+}
+
+_cmd_frontend() {
+  [[ $# -eq 0 ]] && { err "Ej: bin/pty frontend npm run lint"; exit 1; }
+  fe exec web "$@"
+}
+
+_usage() {
+  cat <<EOF
+
+${BOLD}Uso:${RESET}  bin/pty [comando]
+
+${BOLD}Sin comando${RESET} → levanta servicios y abre el menú interactivo
+
+${BOLD}Comandos:${RESET}
+  up        Igual que sin argumento (levanta + menú)
+  menu      Abre el menú sin reiniciar los servicios
+  down      Detiene y elimina los contenedores
+  restart   Baja y vuelve a subir todo
+  ps        Estado de los contenedores
+  build     Re-construye las imágenes sin cache
+  backend   Ejecuta un comando en el contenedor backend
+              Ej: bin/pty backend rails console
+  frontend  Ejecuta un comando en el contenedor frontend
+              Ej: bin/pty frontend npm run lint
+
+EOF
+}
+
+# ── Punto de entrada ──────────────────────────
+main() {
+  local cmd="${1:-up}"
+  shift || true
+
+  case "$cmd" in
+    up)       check_docker; _cmd_up ;;
+    menu)     check_docker; _cmd_menu ;;
+    down)     check_docker; _cmd_down ;;
+    restart)  check_docker; _cmd_restart ;;
+    ps)       check_docker; _cmd_ps ;;
+    build)    check_docker; _cmd_build ;;
+    backend)  check_docker; _cmd_backend "$@" ;;
+    frontend) check_docker; _cmd_frontend "$@" ;;
+    -h|--help|help) _usage ;;
+    *)
+      err "Comando desconocido: '$cmd'"
+      _usage
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"

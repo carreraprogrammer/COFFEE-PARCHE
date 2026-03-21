@@ -2319,3 +2319,277 @@ Processing by Api::V1::FormsController#show as HTML
 Completed 200 OK in 18ms (Views: 0.7ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 9.9ms)
 
 
+  [1m[35m (10.9ms)[0m  [1m[35mDROP TABLE IF EXISTS `form_schemas` CASCADE /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE `form_schemas` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `slug` varchar(255) NOT NULL, `title` varchar(255) NOT NULL, `submit_label` varchar(255) DEFAULT 'Submit' NOT NULL, `submit_endpoint` varchar(255) NOT NULL, `submit_method` varchar(255) DEFAULT 'POST' NOT NULL, `fields` longtext COLLATE utf8mb4_bin NOT NULL, `active` tinyint(1) DEFAULT TRUE NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_form_schemas_on_active` (`active`), UNIQUE INDEX `index_form_schemas_on_slug` (`slug`), CONSTRAINT fields CHECK (json_valid(`fields`))) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `permissions` CASCADE /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE `permissions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `resource` varchar(255) NOT NULL, `action` varchar(255) NOT NULL, `description` text, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_permissions_on_resource_and_action` (`resource`, `action`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `role_permissions` CASCADE /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE `role_permissions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `role_id` bigint NOT NULL, `permission_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_role_permissions_on_permission_id` (`permission_id`), UNIQUE INDEX `index_role_permissions_on_role_id_and_permission_id` (`role_id`, `permission_id`), INDEX `index_role_permissions_on_role_id` (`role_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (1.8ms)[0m  [1m[35mDROP TABLE IF EXISTS `roles` CASCADE /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE `roles` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `slug` varchar(255) NOT NULL, `description` text, `active` tinyint(1) DEFAULT TRUE NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_roles_on_slug` (`slug`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `user_roles` CASCADE /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (9.6ms)[0m  [1m[35mCREATE TABLE `user_roles` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint NOT NULL, `role_id` bigint NOT NULL, `expires_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_user_roles_on_role_id` (`role_id`), UNIQUE INDEX `index_user_roles_on_user_id_and_role_id` (`user_id`, `role_id`), INDEX `index_user_roles_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (12.0ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `encrypted_password` varchar(255), `name` varchar(255) NOT NULL, `refresh_token_hash` varchar(255), `refresh_token_expires_at` datetime(6), `confirmed_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, `super_admin` tinyint(1) DEFAULT FALSE NOT NULL, `google_uid` varchar(255), `avatar_url` varchar(255), `auth_provider` varchar(255), UNIQUE INDEX `index_users_on_email` (`email`), UNIQUE INDEX `index_users_on_google_uid` (`google_uid`), INDEX `index_users_on_refresh_token_hash` (`refresh_token_hash`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (15.7ms)[0m  [1m[35mALTER TABLE `role_permissions` ADD CONSTRAINT `fk_rails_439e640a3f`
+FOREIGN KEY (`permission_id`)
+  REFERENCES `permissions` (`id`)
+ /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (26.9ms)[0m  [1m[35mALTER TABLE `role_permissions` ADD CONSTRAINT `fk_rails_60126080bd`
+FOREIGN KEY (`role_id`)
+  REFERENCES `roles` (`id`)
+ /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (37.0ms)[0m  [1m[35mALTER TABLE `user_roles` ADD CONSTRAINT `fk_rails_3369e0d5fc`
+FOREIGN KEY (`role_id`)
+  REFERENCES `roles` (`id`)
+ /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (31.2ms)[0m  [1m[35mALTER TABLE `user_roles` ADD CONSTRAINT `fk_rails_318345354e`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+ /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (20.1ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY) /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (9) /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(8),
+(7),
+(6),
+(5),
+(4),
+(3),
+(2),
+(1); /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-03-21 21:41:14.356406', '2026-03-21 21:41:14.356410') RETURNING `key` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (4.2ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', 'baefb9fc85b78387e2ea2735f468d6e1f3502699', '2026-03-21 21:41:14.386454', '2026-03-21 21:41:14.386457') RETURNING `key` /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE DATABASE `boilerplate_rails_api_test` DEFAULT CHARACTER SET `utf8mb4` /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (4.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `form_schemas` CASCADE /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE `form_schemas` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `slug` varchar(255) NOT NULL, `title` varchar(255) NOT NULL, `submit_label` varchar(255) DEFAULT 'Submit' NOT NULL, `submit_endpoint` varchar(255) NOT NULL, `submit_method` varchar(255) DEFAULT 'POST' NOT NULL, `fields` longtext COLLATE utf8mb4_bin NOT NULL, `active` tinyint(1) DEFAULT TRUE NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_form_schemas_on_active` (`active`), UNIQUE INDEX `index_form_schemas_on_slug` (`slug`), CONSTRAINT fields CHECK (json_valid(`fields`))) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `permissions` CASCADE /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE `permissions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `resource` varchar(255) NOT NULL, `action` varchar(255) NOT NULL, `description` text, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_permissions_on_resource_and_action` (`resource`, `action`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (2.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `role_permissions` CASCADE /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (8.4ms)[0m  [1m[35mCREATE TABLE `role_permissions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `role_id` bigint NOT NULL, `permission_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_role_permissions_on_permission_id` (`permission_id`), UNIQUE INDEX `index_role_permissions_on_role_id_and_permission_id` (`role_id`, `permission_id`), INDEX `index_role_permissions_on_role_id` (`role_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `roles` CASCADE /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE `roles` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `slug` varchar(255) NOT NULL, `description` text, `active` tinyint(1) DEFAULT TRUE NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_roles_on_slug` (`slug`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (1.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `user_roles` CASCADE /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE TABLE `user_roles` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint NOT NULL, `role_id` bigint NOT NULL, `expires_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_user_roles_on_role_id` (`role_id`), UNIQUE INDEX `index_user_roles_on_user_id_and_role_id` (`user_id`, `role_id`), INDEX `index_user_roles_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `encrypted_password` varchar(255), `name` varchar(255) NOT NULL, `refresh_token_hash` varchar(255), `refresh_token_expires_at` datetime(6), `confirmed_at` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, `super_admin` tinyint(1) DEFAULT FALSE NOT NULL, `google_uid` varchar(255), `avatar_url` varchar(255), `auth_provider` varchar(255), UNIQUE INDEX `index_users_on_email` (`email`), UNIQUE INDEX `index_users_on_google_uid` (`google_uid`), INDEX `index_users_on_refresh_token_hash` (`refresh_token_hash`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (15.5ms)[0m  [1m[35mALTER TABLE `role_permissions` ADD CONSTRAINT `fk_rails_439e640a3f`
+FOREIGN KEY (`permission_id`)
+  REFERENCES `permissions` (`id`)
+ /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (18.3ms)[0m  [1m[35mALTER TABLE `role_permissions` ADD CONSTRAINT `fk_rails_60126080bd`
+FOREIGN KEY (`role_id`)
+  REFERENCES `roles` (`id`)
+ /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (20.6ms)[0m  [1m[35mALTER TABLE `user_roles` ADD CONSTRAINT `fk_rails_3369e0d5fc`
+FOREIGN KEY (`role_id`)
+  REFERENCES `roles` (`id`)
+ /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (20.5ms)[0m  [1m[35mALTER TABLE `user_roles` ADD CONSTRAINT `fk_rails_318345354e`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+ /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY) /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (9) /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(8),
+(7),
+(6),
+(5),
+(4),
+(3),
+(2),
+(1); /*application='BoilerplateRailsApi'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-03-21 21:41:14.671285', '2026-03-21 21:41:14.671635') RETURNING `key` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (1.3ms)[0m  [1m[33mUPDATE `ar_internal_metadata` SET `ar_internal_metadata`.`value` = 'test', `ar_internal_metadata`.`updated_at` = '2026-03-21 21:41:14.679679' WHERE `ar_internal_metadata`.`key` = 'environment' /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.6ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', 'baefb9fc85b78387e2ea2735f468d6e1f3502699', '2026-03-21 21:41:14.685013', '2026-03-21 21:41:14.685015') RETURNING `key` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.4ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'read' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'read' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.5ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'read', 'Puede read users', '2026-03-21 21:41:14.864549', '2026-03-21 21:41:14.864549') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.4ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'create' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'create' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'create', 'Puede create users', '2026-03-21 21:41:14.892131', '2026-03-21 21:41:14.892131') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.5ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'update' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (2.7ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'update' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.5ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'update', 'Puede update users', '2026-03-21 21:41:14.923632', '2026-03-21 21:41:14.923632') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.4ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'destroy' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (2.8ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'destroy' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.5ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'destroy', 'Puede destroy users', '2026-03-21 21:41:14.946175', '2026-03-21 21:41:14.946175') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.4ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'manage' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (2.8ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'manage' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.5ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'manage', 'Puede manage users', '2026-03-21 21:41:14.970401', '2026-03-21 21:41:14.970401') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.4ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'roles' AND `permissions`.`action` = 'read' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'roles' AND `permissions`.`action` = 'read' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('roles', 'read', 'Puede read roles', '2026-03-21 21:41:14.989445', '2026-03-21 21:41:14.989445') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.5ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'roles' AND `permissions`.`action` = 'create' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (3.0ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'roles' AND `permissions`.`action` = 'create' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.9ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('roles', 'create', 'Puede create roles', '2026-03-21 21:41:15.006459', '2026-03-21 21:41:15.006459') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.5ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'roles' AND `permissions`.`action` = 'update' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (2.8ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'roles' AND `permissions`.`action` = 'update' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('roles', 'update', 'Puede update roles', '2026-03-21 21:41:15.032329', '2026-03-21 21:41:15.032329') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.4ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'roles' AND `permissions`.`action` = 'destroy' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (2.8ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'roles' AND `permissions`.`action` = 'destroy' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.5ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('roles', 'destroy', 'Puede destroy roles', '2026-03-21 21:41:15.049277', '2026-03-21 21:41:15.049277') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.4ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'permissions' AND `permissions`.`action` = 'read' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'permissions' AND `permissions`.`action` = 'read' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('permissions', 'read', 'Puede read permissions', '2026-03-21 21:41:15.081678', '2026-03-21 21:41:15.081678') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.4ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'permissions' AND `permissions`.`action` = 'create' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (3.2ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'permissions' AND `permissions`.`action` = 'create' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.5ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('permissions', 'create', 'Puede create permissions', '2026-03-21 21:41:15.098368', '2026-03-21 21:41:15.098368') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.4ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'permissions' AND `permissions`.`action` = 'update' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (3.6ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'permissions' AND `permissions`.`action` = 'update' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('permissions', 'update', 'Puede update permissions', '2026-03-21 21:41:15.114594', '2026-03-21 21:41:15.114594') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.5ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'permissions' AND `permissions`.`action` = 'destroy' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (2.5ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'permissions' AND `permissions`.`action` = 'destroy' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('permissions', 'destroy', 'Puede destroy permissions', '2026-03-21 21:41:15.128173', '2026-03-21 21:41:15.128173') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.3ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'form_schemas' AND `permissions`.`action` = 'read' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'form_schemas' AND `permissions`.`action` = 'read' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.5ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('form_schemas', 'read', 'Puede read form_schemas', '2026-03-21 21:41:15.139709', '2026-03-21 21:41:15.139709') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.5ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'form_schemas' AND `permissions`.`action` = 'create' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (3.0ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'form_schemas' AND `permissions`.`action` = 'create' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('form_schemas', 'create', 'Puede create form_schemas', '2026-03-21 21:41:15.173196', '2026-03-21 21:41:15.173196') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.4ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'form_schemas' AND `permissions`.`action` = 'update' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'form_schemas' AND `permissions`.`action` = 'update' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('form_schemas', 'update', 'Puede update form_schemas', '2026-03-21 21:41:15.193326', '2026-03-21 21:41:15.193326') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.3ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'form_schemas' AND `permissions`.`action` = 'destroy' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'form_schemas' AND `permissions`.`action` = 'destroy' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Create (0.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('form_schemas', 'destroy', 'Puede destroy form_schemas', '2026-03-21 21:41:15.204947', '2026-03-21 21:41:15.204947') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`slug` = 'admin' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRole Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'admin' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRole Create (0.5ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Administrador', 'admin', 'Acceso completo al sistema', TRUE, '2026-03-21 21:41:15.292200', '2026-03-21 21:41:15.292200') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`slug` = 'editor' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRole Exists? (6.5ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'editor' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRole Create (0.6ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Editor', 'editor', 'Puede gestionar contenido pero no usuarios ni roles', TRUE, '2026-03-21 21:41:15.313791', '2026-03-21 21:41:15.313791') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`slug` = 'viewer' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRole Exists? (2.5ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'viewer' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRole Create (0.4ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Viewer', 'viewer', 'Solo lectura', TRUE, '2026-03-21 21:41:15.327932', '2026-03-21 21:41:15.327932') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.5ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.6ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `permissions`.`id` = `role_permissions`.`permission_id` WHERE `role_permissions`.`role_id` = 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (1.4ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 1, '2026-03-21 21:41:15.602516', '2026-03-21 21:41:15.602516') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.6ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 2, '2026-03-21 21:41:15.637878', '2026-03-21 21:41:15.637878') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (1.1ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 3, '2026-03-21 21:41:15.650217', '2026-03-21 21:41:15.650217') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (2.9ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 4, '2026-03-21 21:41:15.667090', '2026-03-21 21:41:15.667090') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.8ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 5, '2026-03-21 21:41:15.718719', '2026-03-21 21:41:15.718719') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (1.5ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 6, '2026-03-21 21:41:15.745336', '2026-03-21 21:41:15.745336') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.8ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 7, '2026-03-21 21:41:15.768835', '2026-03-21 21:41:15.768835') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.8ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 8, '2026-03-21 21:41:15.790811', '2026-03-21 21:41:15.790811') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.5ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 9, '2026-03-21 21:41:15.798098', '2026-03-21 21:41:15.798098') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.5ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 10, '2026-03-21 21:41:15.837646', '2026-03-21 21:41:15.837646') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.6ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 11, '2026-03-21 21:41:15.846406', '2026-03-21 21:41:15.846406') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.6ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 12, '2026-03-21 21:41:15.849360', '2026-03-21 21:41:15.849360') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.6ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 13, '2026-03-21 21:41:15.854772', '2026-03-21 21:41:15.854772') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.9ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 14, '2026-03-21 21:41:15.886234', '2026-03-21 21:41:15.886234') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (1.3ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 15, '2026-03-21 21:41:15.937538', '2026-03-21 21:41:15.937538') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.7ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 16, '2026-03-21 21:41:15.950477', '2026-03-21 21:41:15.950477') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.9ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (1, 17, '2026-03-21 21:41:15.956164', '2026-03-21 21:41:15.956164') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.8ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`resource` = 'form_schemas' /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (1.4ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `permissions`.`id` = `role_permissions`.`permission_id` WHERE `role_permissions`.`role_id` = 2 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (9.1ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (2, 15, '2026-03-21 21:41:16.055163', '2026-03-21 21:41:16.055163') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.8ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (2, 17, '2026-03-21 21:41:16.074525', '2026-03-21 21:41:16.074525') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.9ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (2, 14, '2026-03-21 21:41:16.079667', '2026-03-21 21:41:16.079667') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.6ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (2, 16, '2026-03-21 21:41:16.085175', '2026-03-21 21:41:16.085175') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.5ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`action` = 'read' /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mPermission Load (0.8ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `permissions`.`id` = `role_permissions`.`permission_id` WHERE `role_permissions`.`role_id` = 3 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (8.5ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (3, 1, '2026-03-21 21:41:16.102210', '2026-03-21 21:41:16.102210') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.8ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (3, 6, '2026-03-21 21:41:16.116805', '2026-03-21 21:41:16.116805') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.7ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (3, 10, '2026-03-21 21:41:16.129879', '2026-03-21 21:41:16.129879') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mRolePermission Create (0.5ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (3, 14, '2026-03-21 21:41:16.133794', '2026-03-21 21:41:16.133794') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'superadmin@boilerplate.dev' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'superadmin@boilerplate.dev' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`, `google_uid`, `avatar_url`, `auth_provider`) VALUES ('superadmin@boilerplate.dev', '$2a$12$sylGGUb15qiGn0UQMinyxOzU2s4Yiha1vJmu7xPelDtOa51RHDyVS', 'Super Admin', NULL, NULL, NULL, '2026-03-21 21:41:16.520473', '2026-03-21 21:41:16.520473', TRUE, NULL, NULL, NULL) RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'admin@boilerplate.dev' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUser Exists? (3.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'admin@boilerplate.dev' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`, `google_uid`, `avatar_url`, `auth_provider`) VALUES ('admin@boilerplate.dev', '$2a$12$I7vdEnkOspL5RSSnbxMm7.SBP.LwV4hsV7IeJu6HGr38bbHE6kMlO', 'Admin User', NULL, NULL, NULL, '2026-03-21 21:41:16.878812', '2026-03-21 21:41:16.878812', FALSE, NULL, NULL, NULL) RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUserRole Load (0.5ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 2 AND `user_roles`.`role_id` = 1 LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUserRole Create (0.5ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (2, 1, NULL, '2026-03-21 21:41:16.944811', '2026-03-21 21:41:16.944811') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'viewer@boilerplate.dev' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUser Exists? (3.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'viewer@boilerplate.dev' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`, `google_uid`, `avatar_url`, `auth_provider`) VALUES ('viewer@boilerplate.dev', '$2a$12$vaFCfHoq09D6ugNMv2oBA..JkfbzvpP0Yx.8/XG/ulcpuJWakwlbC', 'Viewer User', NULL, NULL, NULL, '2026-03-21 21:41:17.219254', '2026-03-21 21:41:17.219254', FALSE, NULL, NULL, NULL) RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUserRole Load (0.5ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 3 AND `user_roles`.`role_id` = 3 LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mUserRole Create (2.2ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (3, 3, NULL, '2026-03-21 21:41:17.231088', '2026-03-21 21:41:17.231088') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mFormSchema Load (0.5ms)[0m  [1m[34mSELECT `form_schemas`.* FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mFormSchema Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mFormSchema Create (0.5ms)[0m  [1m[32mINSERT INTO `form_schemas` (`slug`, `title`, `submit_label`, `submit_endpoint`, `submit_method`, `fields`, `active`, `created_at`, `updated_at`) VALUES ('login-form', 'Sign In', 'Sign In', '/api/v1/auth/login', 'POST', '[{\"name\":\"email\",\"label\":\"Email address\",\"type\":\"email\",\"placeholder\":\"you@example.com\",\"required\":true,\"order\":1,\"validations\":{\"format\":\"email\",\"max_length\":255}},{\"name\":\"password\",\"label\":\"Password\",\"type\":\"password\",\"placeholder\":\"********\",\"required\":true,\"order\":2,\"validations\":{\"min_length\":8}}]', TRUE, '2026-03-21 21:41:17.296507', '2026-03-21 21:41:17.296507') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mFormSchema Load (0.8ms)[0m  [1m[34mSELECT `form_schemas`.* FROM `form_schemas` WHERE `form_schemas`.`slug` = 'register-form' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mFormSchema Exists? (7.8ms)[0m  [1m[34mSELECT 1 AS one FROM `form_schemas` WHERE `form_schemas`.`slug` = 'register-form' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mFormSchema Create (0.5ms)[0m  [1m[32mINSERT INTO `form_schemas` (`slug`, `title`, `submit_label`, `submit_endpoint`, `submit_method`, `fields`, `active`, `created_at`, `updated_at`) VALUES ('register-form', 'Create Account', 'Create Account', '/api/v1/auth/register', 'POST', '[{\"name\":\"name\",\"label\":\"Full name\",\"type\":\"text\",\"placeholder\":\"Your name\",\"required\":true,\"order\":1,\"validations\":{\"min_length\":2,\"max_length\":100}},{\"name\":\"email\",\"label\":\"Email address\",\"type\":\"email\",\"placeholder\":\"you@example.com\",\"required\":true,\"order\":2,\"validations\":{\"format\":\"email\",\"max_length\":255}},{\"name\":\"password\",\"label\":\"Password\",\"type\":\"password\",\"placeholder\":\"Min. 8 characters\",\"required\":true,\"order\":3,\"validations\":{\"min_length\":8}},{\"name\":\"password_confirmation\",\"label\":\"Confirm password\",\"type\":\"password\",\"placeholder\":\"Repeat your password\",\"required\":true,\"order\":4,\"validations\":{\"min_length\":8}}]', TRUE, '2026-03-21 21:41:17.330765', '2026-03-21 21:41:17.330765') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mFormSchema Load (0.6ms)[0m  [1m[34mSELECT `form_schemas`.* FROM `form_schemas` WHERE `form_schemas`.`slug` = 'profile-form' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mFormSchema Exists? (3.4ms)[0m  [1m[34mSELECT 1 AS one FROM `form_schemas` WHERE `form_schemas`.`slug` = 'profile-form' LIMIT 1 /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mFormSchema Create (0.6ms)[0m  [1m[32mINSERT INTO `form_schemas` (`slug`, `title`, `submit_label`, `submit_endpoint`, `submit_method`, `fields`, `active`, `created_at`, `updated_at`) VALUES ('profile-form', 'Edit Profile', 'Save Changes', '/api/v1/auth/me', 'PATCH', '[{\"name\":\"name\",\"label\":\"Full name\",\"type\":\"text\",\"placeholder\":\"Your name\",\"required\":true,\"order\":1,\"validations\":{\"min_length\":2,\"max_length\":100}},{\"name\":\"bio\",\"label\":\"Bio\",\"type\":\"textarea\",\"placeholder\":\"Tell us about yourself\",\"required\":false,\"order\":2,\"rows\":4,\"validations\":{\"max_length\":500}},{\"name\":\"phone\",\"label\":\"Phone number\",\"type\":\"tel\",\"placeholder\":\"+57 300 000 0000\",\"required\":false,\"order\":3,\"validations\":{\"format\":\"phone\"}},{\"name\":\"birth_date\",\"label\":\"Date of birth\",\"type\":\"date\",\"required\":false,\"order\":4}]', TRUE, '2026-03-21 21:41:17.353662', '2026-03-21 21:41:17.353662') RETURNING `id` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mFormSchema Count (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `form_schemas` /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (4.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='BoilerplateRailsApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='BoilerplateRailsApi'*/[0m

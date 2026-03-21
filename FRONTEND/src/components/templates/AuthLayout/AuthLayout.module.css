@@ -95,6 +95,12 @@
   pointer-events: none;
 }
 
+.panelLogoWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-6);
+}
+
 .panelBody {
   position: relative;
   width: min(100%, 520px);
