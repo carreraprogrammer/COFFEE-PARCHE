@@ -1,0 +1,827 @@
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (13.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (7.9ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mUser Create (27.1ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('new@example.com', '$2a$12$LY2e8eL13.5SC4UWE3pDlOkoRtxrx9bA42Jzd9w4Fjfbrbx0k8cxW', 'Daniel', NULL, NULL, NULL, '2026-03-20 22:19:11.414100', '2026-03-20 22:19:11.414100', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Update (7.8ms)[0m  [1m[33mUPDATE `users` SET `users`.`refresh_token_hash` = '$2a$12$NxZYA47I5R8hEVSdac53o.LZrfjvg/qEhGJ.YLzSZfwdo0NVPmcMu', `users`.`refresh_token_expires_at` = '2026-04-19 22:19:12.027449', `users`.`updated_at` = '2026-03-20 22:19:12.054788' WHERE `users`.`id` = 1[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[36mPermission Load (8.2ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 1 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:19:12.322984')[0m
+  [1m[36mTRANSACTION (5.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (4.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('new@example.com', '$2a$12$FwDkgBpty5PkLZCCVOEQ8uocaBR8EqdUwSrihnSfddEFtmgkWSahC', 'Blair Hirthe', NULL, NULL, NULL, '2026-03-20 22:19:16.441095', '2026-03-20 22:19:16.441095', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (3.2ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRole Create (0.6ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Investor Associate', 'editor', 'Possimus id ut eum.', TRUE, '2026-03-20 22:19:16.552379', '2026-03-20 22:19:16.552379') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'gabriele_dooley@wyman.test' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('gabriele_dooley@wyman.test', '$2a$12$TGEvDQV5Jo9.el.xRBK/ku6szeZ/X997K.fD400FSfmHHkfHmQI4y', 'Anthony Balistreri', NULL, NULL, NULL, '2026-03-20 22:19:16.830900', '2026-03-20 22:19:16.830900', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE AND `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRolePermission Load (0.7ms)[0m  [1m[34mSELECT `role_permissions`.* FROM `role_permissions` WHERE `role_permissions`.`role_id` = 1[0m
+  [1m[36mUserRole Load (0.4ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 3 AND `user_roles`.`role_id` = 1 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`id` = 1 LIMIT 1[0m
+  [1m[36mUserRole Create (1.1ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (3, 1, NULL, '2026-03-20 22:19:16.931108', '2026-03-20 22:19:16.931108') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUserRole Load (0.6ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 3 AND `user_roles`.`role_id` = 1 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRole Create (0.8ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('National Technology Executive', 'editor', 'Asperiores et ducimus accusantium.', TRUE, '2026-03-20 22:19:16.962781', '2026-03-20 22:19:16.962781') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'katlyn@schuster.example' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('katlyn@schuster.example', '$2a$12$ENwd3K.wPARidZdHNeX53utTt71J6cHP6r5Z1eE4vo2E1DGXwH9lm', 'Leon Stanton', NULL, NULL, NULL, '2026-03-20 22:19:17.222221', '2026-03-20 22:19:17.222221', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE AND `roles`.`slug` = 'missing' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRole Create (0.3ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('District Developer', 'editor', 'Non in magnam veniam.', TRUE, '2026-03-20 22:19:17.239706', '2026-03-20 22:19:17.239706') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'brenton.raynor@shields.example' LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('brenton.raynor@shields.example', '$2a$12$eIuF4BBf4MZqqxYWLpIfputsRbMAm1JeIagMrehjCzPQvpq6kGnSq', 'Novella Goodwin', NULL, NULL, NULL, '2026-03-20 22:19:17.469656', '2026-03-20 22:19:17.469656', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE AND `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRolePermission Load (0.4ms)[0m  [1m[34mSELECT `role_permissions`.* FROM `role_permissions` WHERE `role_permissions`.`role_id` = 3[0m
+  [1m[36mUserRole Load (0.4ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 5 AND `user_roles`.`role_id` = 3 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`id` = 3 LIMIT 1[0m
+  [1m[36mUserRole Create (0.4ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (5, 3, NULL, '2026-03-20 22:19:17.511898', '2026-03-20 22:19:17.511898') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUserRole Count (2.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `user_roles`[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE AND `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRolePermission Load (0.6ms)[0m  [1m[34mSELECT `role_permissions`.* FROM `role_permissions` WHERE `role_permissions`.`role_id` = 3[0m
+  [1m[36mUserRole Load (0.3ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 5 AND `user_roles`.`role_id` = 3 LIMIT 1[0m
+  [1m[36mUserRole Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `user_roles`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPermission Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'read' LIMIT 1[0m
+  [1m[36mPermission Create (0.5ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'read', NULL, '2026-03-20 22:19:17.592473', '2026-03-20 22:19:17.592473') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'role-1' LIMIT 1[0m
+  [1m[36mRole Create (0.3ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Marketing Designer', 'role-1', 'Ab magni accusamus inventore.', TRUE, '2026-03-20 22:19:17.605259', '2026-03-20 22:19:17.605259') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRolePermission Create (1.2ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (4, 1, '2026-03-20 22:19:17.618631', '2026-03-20 22:19:17.618631') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (3.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'lesia@pfannerstill.test' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('lesia@pfannerstill.test', '$2a$12$tZf29X3iIB3OSCSkhNJn5edEDpwNDqnOk2oS8e6WX1zsfZlVngACG', 'Celsa Nicolas MD', NULL, NULL, NULL, '2026-03-20 22:19:17.845615', '2026-03-20 22:19:17.845615', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserRole Create (1.0ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (6, 4, NULL, '2026-03-20 22:19:17.855827', '2026-03-20 22:19:17.855827') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (0.9ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 6 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:19:17.866808')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPermission Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'read' LIMIT 1[0m
+  [1m[36mPermission Create (0.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'read', NULL, '2026-03-20 22:19:17.888956', '2026-03-20 22:19:17.888956') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'cecile@senger.test' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('cecile@senger.test', '$2a$12$PFmbYeb9FZrDyrrrccdaSOQkVF4X31GqTgQV9cWlardjzACa5V4jW', 'Lynn Swaniawski Ret.', NULL, NULL, NULL, '2026-03-20 22:19:18.113619', '2026-03-20 22:19:18.113619', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (0.8ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 7 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:19:18.115855')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPermission Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'read' LIMIT 1[0m
+  [1m[36mPermission Create (0.5ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'read', NULL, '2026-03-20 22:19:18.126106', '2026-03-20 22:19:18.126106') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'role-2' LIMIT 1[0m
+  [1m[36mRole Create (0.3ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Lead Director', 'role-2', 'Ullam quo non cupiditate.', TRUE, '2026-03-20 22:19:18.132132', '2026-03-20 22:19:18.132132') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRolePermission Create (0.9ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (5, 3, '2026-03-20 22:19:18.135796', '2026-03-20 22:19:18.135796') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'vasiliki@bosco-littel.example' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('vasiliki@bosco-littel.example', '$2a$12$EEIrS8a3MtolJF2ao0VuCuRqaYKEpFkKsfwnsrReFj.VaJefXeU9a', 'Korey Champlin', NULL, NULL, NULL, '2026-03-20 22:19:18.365825', '2026-03-20 22:19:18.365825', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserRole Create (1.1ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (8, 5, '2026-03-19 22:19:18.367911', '2026-03-20 22:19:18.372843', '2026-03-20 22:19:18.372843') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (3.5ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 8 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:19:18.380533')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'dora_jacobs@weimann.test' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('dora_jacobs@weimann.test', '$2a$12$ZTJdp8xI0p8Pb75xXPkxX.1Ni08quwcixt7yAvO1xMQ8KfhEFIHSa', 'The Hon. Elwood McKenzie', NULL, NULL, NULL, '2026-03-20 22:19:18.650749', '2026-03-20 22:19:18.650749', TRUE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'conrad@wiegand-stiedemann.test' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('conrad@wiegand-stiedemann.test', '$2a$12$aAUvRsVwTGj8AsQDh4UEJe1oefzlO4e3RbljmdgevfLoJcbpyCTF.', 'Sen. Daniel Boyer', NULL, NULL, NULL, '2026-03-20 22:19:18.882225', '2026-03-20 22:19:18.882225', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'angel.reinger@dietrich.test' LIMIT 1[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('angel.reinger@dietrich.test', '$2a$12$Kefk0iXfvVMP8LwnERPHUen7geG5upxnq3bcKClUObyHWeaqctd8a', 'Miss Moira Schultz', NULL, NULL, NULL, '2026-03-20 22:19:19.139729', '2026-03-20 22:19:19.139729', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'gail.waters@weber.example' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('gail.waters@weber.example', '$2a$12$Z67XEKOPo2ifYe61QJ7LzOe3dx9uvBuITMf1ZZfwVEzRlCyUr5cu.', 'Mrs. Mickey Johns', NULL, NULL, NULL, '2026-03-20 22:19:19.361124', '2026-03-20 22:19:19.361124', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'randal_vandervort@witting.example' LIMIT 1[0m
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('randal_vandervort@witting.example', '$2a$12$Bk1bE23nuXJ/ypgJYYEncOVolCrlnFAwZDu0nrtxQoutVSx.UZxni', 'Dexter Moen', NULL, NULL, NULL, '2026-03-20 22:19:19.585304', '2026-03-20 22:19:19.585304', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'stan@shanahan.test' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('stan@shanahan.test', '$2a$12$EAvHH.7oBoBZfOxRmcJ0i.ofBg7EYKPZFMXSmY5eMgvR6xk4A6K32', 'Reggie Anderson', NULL, NULL, NULL, '2026-03-20 22:19:19.818607', '2026-03-20 22:19:19.818607', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/auth/register" for 127.0.0.1 at 2026-03-20 22:19:19 +0000
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "name"=>"Daniel"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('new@example.com', '$2a$12$9SiMfx1tvy2H/noASS6YYuzeIe8wdQ5EiBu48Z4QLR0C3IF/Xej4S', 'Daniel', NULL, NULL, NULL, '2026-03-20 22:19:20.287614', '2026-03-20 22:19:20.287614', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 15 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Update (1.2ms)[0m  [1m[33mUPDATE `users` SET `users`.`refresh_token_hash` = '$2a$12$X5PhfMLZIQSxXOKZE0blT.QpoyKRHuUZh9mUqLGofj/EAW.6yyGsS', `users`.`refresh_token_expires_at` = '2026-04-19 22:19:20.529884', `users`.`updated_at` = '2026-03-20 22:19:20.534713' WHERE `users`.`id` = 15[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 15 LIMIT 1[0m
+  [1m[36mPermission Load (1.1ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 15 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:19:20.541890')[0m
+Completed 500 Internal Server Error in 579ms (ActiveRecord: 7.0ms (7 queries, 0 cached) | GC: 15.8ms)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'existing@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('existing@example.com', '$2a$12$.8I99d1IoKaOc59TL0pvC.FNq.Q9Ygi8eNYOysXzRUI2TkhGDfJJa', 'Rep. Louanne Schaden', NULL, NULL, NULL, '2026-03-20 22:19:20.797571', '2026-03-20 22:19:20.797571', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/auth/register" for 127.0.0.1 at 2026-03-20 22:19:20 +0000
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "name"=>"Daniel"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'existing@example.com' LIMIT 1[0m
+Completed 422 Unprocessable Content in 5ms (Views: 0.4ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormSchema Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' LIMIT 1[0m
+  [1m[36mFormSchema Create (1.7ms)[0m  [1m[32mINSERT INTO `form_schemas` (`slug`, `title`, `submit_label`, `submit_endpoint`, `submit_method`, `fields`, `active`, `created_at`, `updated_at`) VALUES ('login-form', 'Test Form', 'Submit', '/api/v1/auth/login', 'POST', '[{\"name\"=>\"email\", \"label\"=>\"Email\", \"type\"=>\"email\", \"required\"=>true, \"order\"=>1}]', TRUE, '2026-03-20 22:19:20.869146', '2026-03-20 22:19:20.869146') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormSchema Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' LIMIT 1[0m
+  [1m[36mFormSchema Create (0.7ms)[0m  [1m[32mINSERT INTO `form_schemas` (`slug`, `title`, `submit_label`, `submit_endpoint`, `submit_method`, `fields`, `active`, `created_at`, `updated_at`) VALUES ('login-form', 'Test Form', 'Submit', '/api/v1/auth/login', 'POST', '[{\"name\"=>\"email\", \"label\"=>\"Email\", \"type\"=>\"email\", \"required\"=>true, \"order\"=>1}]', TRUE, '2026-03-20 22:19:20.882120', '2026-03-20 22:19:20.882120') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormSchema Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' LIMIT 1[0m
+  [1m[36mFormSchema Create (0.6ms)[0m  [1m[32mINSERT INTO `form_schemas` (`slug`, `title`, `submit_label`, `submit_endpoint`, `submit_method`, `fields`, `active`, `created_at`, `updated_at`) VALUES ('login-form', 'Test Form', 'Submit', '/api/v1/auth/login', 'POST', '[{\"name\"=>\"email\", \"label\"=>\"Email\", \"type\"=>\"email\", \"required\"=>true, \"order\"=>1}]', TRUE, '2026-03-20 22:19:20.889732', '2026-03-20 22:19:20.889732') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'admin' LIMIT 1[0m
+  [1m[36mRole Create (0.8ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Administrador', 'admin', 'Modi minus non voluptatem.', TRUE, '2026-03-20 22:19:20.905760', '2026-03-20 22:19:20.905760') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPermission Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'roles' AND `permissions`.`action` = 'read' LIMIT 1[0m
+  [1m[36mPermission Create (0.5ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('roles', 'read', NULL, '2026-03-20 22:19:20.915027', '2026-03-20 22:19:20.915027') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'reader-role' LIMIT 1[0m
+  [1m[36mRole Create (0.4ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Sales Architect', 'reader-role', 'Ut et laudantium et.', TRUE, '2026-03-20 22:19:20.921004', '2026-03-20 22:19:20.921004') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRolePermission Create (2.3ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (7, 4, '2026-03-20 22:19:20.927258', '2026-03-20 22:19:20.927258') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'carlo_greenfelder@haley.example' LIMIT 1[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('carlo_greenfelder@haley.example', '$2a$12$MFt.xoI9KgsVzcA/SBuy6ey4K/oomOLpDuz.IrNyJDYNdxXqlqQLa', 'Titus Collins', NULL, NULL, NULL, '2026-03-20 22:19:21.290844', '2026-03-20 22:19:21.290844', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserRole Create (1.6ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (17, 7, NULL, '2026-03-20 22:19:21.296789', '2026-03-20 22:19:21.296789') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (2.4ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 17 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:19:21.301012')[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'admin' LIMIT 1[0m
+  [1m[36mRole Create (0.5ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Administrador', 'admin', 'Omnis consequatur id dolores.', TRUE, '2026-03-20 22:19:21.316558', '2026-03-20 22:19:21.316558') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'quinn.turcotte@wuckert.example' LIMIT 1[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('quinn.turcotte@wuckert.example', '$2a$12$LIcG9FOgs/Lhq9MHkcgnr.6D38OovQQZBnV3kZ6qbzXrj4vChRQR6', 'Roscoe Carroll', NULL, NULL, NULL, '2026-03-20 22:19:21.574617', '2026-03-20 22:19:21.574617', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (0.9ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 18 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:19:21.577782')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'admin' LIMIT 1[0m
+  [1m[36mRole Create (0.4ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Administrador', 'admin', 'Est ipsa tempore dolorum.', TRUE, '2026-03-20 22:19:21.585729', '2026-03-20 22:19:21.585729') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/roles" for 127.0.0.1 at 2026-03-20 22:19:21 +0000
+Processing by Api::V1::RolesController#index as HTML
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (12.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mUser Create (19.0ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('new@example.com', '$2a$12$p7yq3PSw7lpB79tmEBdMCeP9MV1x9OgmvL8CWM.NdBoHAK3JHJ/8q', 'Daniel', NULL, NULL, NULL, '2026-03-20 22:30:00.453092', '2026-03-20 22:30:00.453092', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 19 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Update (5.4ms)[0m  [1m[33mUPDATE `users` SET `users`.`refresh_token_hash` = '$2a$12$xXN1BnPkQ4qGXNF9Ur.cw.FtcuPZ46.mpnIcOOV8Kc5Vl5kMF45QW', `users`.`refresh_token_expires_at` = '2026-04-19 22:30:00.731894', `users`.`updated_at` = '2026-03-20 22:30:00.750513' WHERE `users`.`id` = 19[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 19 LIMIT 1[0m
+  [1m[36mPermission Load (8.4ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 19 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:30:00.879005')[0m
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 19 LIMIT 1[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('new@example.com', '$2a$12$qKLDcFkrjyHnaQeSmbWCO.NcQjRRf7VxYzWiDseww27vJkE/kDf/G', 'Gaston Larson', NULL, NULL, NULL, '2026-03-20 22:30:01.729164', '2026-03-20 22:30:01.729164', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (5.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (6.1ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRole Create (1.5ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Investor Representative', 'editor', 'Id dolorem nostrum non.', TRUE, '2026-03-20 22:30:01.858236', '2026-03-20 22:30:01.858236') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'jannette_satterfield@crist.test' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('jannette_satterfield@crist.test', '$2a$12$qaDJ4mOkA.ZeDdpPdRa9gummM7MgGhlV5wH2Rhuq6dq5Dn1svK3sS', 'Lynnette Rempel', NULL, NULL, NULL, '2026-03-20 22:30:02.128113', '2026-03-20 22:30:02.128113', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE AND `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRolePermission Load (3.2ms)[0m  [1m[34mSELECT `role_permissions`.* FROM `role_permissions` WHERE `role_permissions`.`role_id` = 10[0m
+  [1m[36mUserRole Load (0.7ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 21 AND `user_roles`.`role_id` = 10 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 21 LIMIT 1[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`id` = 10 LIMIT 1[0m
+  [1m[36mUserRole Create (0.5ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (21, 10, NULL, '2026-03-20 22:30:02.253097', '2026-03-20 22:30:02.253097') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUserRole Load (0.6ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 21 AND `user_roles`.`role_id` = 10 LIMIT 1[0m
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRole Create (0.5ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Dynamic Analyst', 'editor', 'Error harum sapiente similique.', TRUE, '2026-03-20 22:30:02.285479', '2026-03-20 22:30:02.285479') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'cheryle@thompson.example' LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('cheryle@thompson.example', '$2a$12$ZM4PXiGx.zW8Y77MQsDD2O6g3eQ0PkRaLJxVi5y6RtgtGCrhzvoOq', 'Almeta Paucek V', NULL, NULL, NULL, '2026-03-20 22:30:02.516814', '2026-03-20 22:30:02.516814', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE AND `roles`.`slug` = 'missing' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRole Create (0.4ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Farming Officer', 'editor', 'Animi debitis et corrupti.', TRUE, '2026-03-20 22:30:02.539080', '2026-03-20 22:30:02.539080') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'evelia_rice@feeney.test' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('evelia_rice@feeney.test', '$2a$12$83mKpiOjJJmiOHlPy9aHweQmiQKtKOGXkjjH9xY.7LkzHUjCMTrv2', 'Rico Towne', NULL, NULL, NULL, '2026-03-20 22:30:02.775432', '2026-03-20 22:30:02.775432', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE AND `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRolePermission Load (0.4ms)[0m  [1m[34mSELECT `role_permissions`.* FROM `role_permissions` WHERE `role_permissions`.`role_id` = 12[0m
+  [1m[36mUserRole Load (0.4ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 23 AND `user_roles`.`role_id` = 12 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 23 LIMIT 1[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`id` = 12 LIMIT 1[0m
+  [1m[36mUserRole Create (0.6ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (23, 12, NULL, '2026-03-20 22:30:02.812689', '2026-03-20 22:30:02.812689') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUserRole Count (1.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `user_roles`[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE AND `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRolePermission Load (0.5ms)[0m  [1m[34mSELECT `role_permissions`.* FROM `role_permissions` WHERE `role_permissions`.`role_id` = 12[0m
+  [1m[36mUserRole Load (0.5ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 23 AND `user_roles`.`role_id` = 12 LIMIT 1[0m
+  [1m[36mUserRole Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `user_roles`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPermission Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'read' LIMIT 1[0m
+  [1m[36mPermission Create (1.9ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'read', NULL, '2026-03-20 22:30:02.897657', '2026-03-20 22:30:02.897657') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'role-1' LIMIT 1[0m
+  [1m[36mRole Create (0.3ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Banking Coordinator', 'role-1', 'Ad fugiat et ipsa.', TRUE, '2026-03-20 22:30:02.911775', '2026-03-20 22:30:02.911775') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRolePermission Create (31.4ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (13, 5, '2026-03-20 22:30:02.933529', '2026-03-20 22:30:02.933529') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'gus@haley.test' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('gus@haley.test', '$2a$12$heWcK4ulogRMW3E9cUnWouJhoZYfAneAyBX9pqKjoyHahmdNS7SZu', 'Natasha Emard', NULL, NULL, NULL, '2026-03-20 22:30:03.201857', '2026-03-20 22:30:03.201857', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserRole Create (2.1ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (24, 13, NULL, '2026-03-20 22:30:03.214679', '2026-03-20 22:30:03.214679') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (1.1ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 24 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:30:03.230611')[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPermission Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'read' LIMIT 1[0m
+  [1m[36mPermission Create (0.5ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'read', NULL, '2026-03-20 22:30:03.257557', '2026-03-20 22:30:03.257557') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'lesley@roberts-kutch.example' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('lesley@roberts-kutch.example', '$2a$12$Pzz6sSYOyhFz7ASOJD5sE.D7CLfk8zg7gIAAPxBhGr9Y3RKeh8gjq', 'Myesha Wehner', NULL, NULL, NULL, '2026-03-20 22:30:03.487006', '2026-03-20 22:30:03.487006', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (1.0ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 25 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:30:03.489540')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPermission Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'read' LIMIT 1[0m
+  [1m[36mPermission Create (0.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'read', NULL, '2026-03-20 22:30:03.502371', '2026-03-20 22:30:03.502371') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'role-2' LIMIT 1[0m
+  [1m[36mRole Create (0.3ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('International Technology Analyst', 'role-2', 'Nesciunt qui deserunt recusandae.', TRUE, '2026-03-20 22:30:03.508096', '2026-03-20 22:30:03.508096') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRolePermission Create (0.9ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (14, 7, '2026-03-20 22:30:03.512231', '2026-03-20 22:30:03.512231') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'del@brakus.example' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('del@brakus.example', '$2a$12$j8XwDsWMkdqAbqe8N9Am1uk0JTlCKP/MyxyOO6VTl7KULa8wFJ7qO', 'Dallas Mueller', NULL, NULL, NULL, '2026-03-20 22:30:03.731824', '2026-03-20 22:30:03.731824', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserRole Create (1.0ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (26, 14, '2026-03-19 22:30:03.733678', '2026-03-20 22:30:03.738153', '2026-03-20 22:30:03.738153') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (2.3ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 26 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:30:03.742147')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'mary.murray@dietrich.test' LIMIT 1[0m
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('mary.murray@dietrich.test', '$2a$12$MvTFJI9aEZ.uxeZUigTgCOvYnxBu6iEr76mQA8D07yiluTmEiyzAi', 'Lino Flatley Sr.', NULL, NULL, NULL, '2026-03-20 22:30:03.976527', '2026-03-20 22:30:03.976527', TRUE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'nicki.howe@king-ankunding.test' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('nicki.howe@king-ankunding.test', '$2a$12$Y566xr0DefVEDDQnH.K4yeoPJCHN0g8DY.a/H/J3umUPaHWeCV9ja', 'Nubia Funk', NULL, NULL, NULL, '2026-03-20 22:30:04.204468', '2026-03-20 22:30:04.204468', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'joey@bins.test' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('joey@bins.test', '$2a$12$vWgLp90o47FcVd6BUDtp7.M4W0LAF/Sdl.kuipgOmZCsK5uTAxiBG', 'Kelsi Simonis', NULL, NULL, NULL, '2026-03-20 22:30:04.432028', '2026-03-20 22:30:04.432028', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'louie_bergstrom@jaskolski-funk.example' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('louie_bergstrom@jaskolski-funk.example', '$2a$12$gl1i4uXdTOasnkQhhXKN9OgaIspI17XI95sz2Pa7jUH2jRdsi0Mq6', 'Olen Hintz', NULL, NULL, NULL, '2026-03-20 22:30:04.653312', '2026-03-20 22:30:04.653312', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'lenard@streich.test' LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('lenard@streich.test', '$2a$12$Bwg15tVxuIewIPeALGwRoOCYNaU3tO9/dE6K8Ty8vijzBxI8NPqRC', 'Marx Buckridge', NULL, NULL, NULL, '2026-03-20 22:30:04.878887', '2026-03-20 22:30:04.878887', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'nikki.gorczany@kessler-schuster.example' LIMIT 1[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('nikki.gorczany@kessler-schuster.example', '$2a$12$q1BNYn18mb9n4YtmEBjwH.2B8UMKoD8Sr6SPD7ZpxtGf3RyWhnQ/W', 'Andrea Turner', NULL, NULL, NULL, '2026-03-20 22:30:05.140783', '2026-03-20 22:30:05.140783', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/auth/register" for 127.0.0.1 at 2026-03-20 22:30:05 +0000
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "name"=>"Daniel"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('new@example.com', '$2a$12$6UIAW43ISgsp6S/0tTf1x.JuhnhGj7rLe4sXQ/WL0BDTC9bdFIx7u', 'Daniel', NULL, NULL, NULL, '2026-03-20 22:30:05.936589', '2026-03-20 22:30:05.936589', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 33 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Update (1.6ms)[0m  [1m[33mUPDATE `users` SET `users`.`refresh_token_hash` = '$2a$12$6zBUNMZ.0CF.XkdOXvp23uSQeppctnhpfpT.Cwo5.jbPkoa0HPOei', `users`.`refresh_token_expires_at` = '2026-04-19 22:30:06.391941', `users`.`updated_at` = '2026-03-20 22:30:06.401867' WHERE `users`.`id` = 33[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 33 LIMIT 1[0m
+  [1m[36mPermission Load (2.0ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 33 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:30:06.412589')[0m
+  [1m[36mCACHE User Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 33 LIMIT 1[0m
+Completed 201 Created in 848ms (Views: 0.5ms | ActiveRecord: 9.2ms (8 queries, 1 cached) | GC: 52.7ms)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'existing@example.com' LIMIT 1[0m
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('existing@example.com', '$2a$12$pP1Ill2R09pD8sMZE1tdK.06Xy1SS3OzK2mawHu..OI9G/AKhG9TG', 'Gonzalo Stroman', NULL, NULL, NULL, '2026-03-20 22:30:06.776836', '2026-03-20 22:30:06.776836', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/auth/register" for 127.0.0.1 at 2026-03-20 22:30:06 +0000
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "name"=>"Daniel"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'existing@example.com' LIMIT 1[0m
+Completed 422 Unprocessable Content in 3ms (Views: 0.2ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormSchema Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' LIMIT 1[0m
+  [1m[36mFormSchema Create (5.2ms)[0m  [1m[32mINSERT INTO `form_schemas` (`slug`, `title`, `submit_label`, `submit_endpoint`, `submit_method`, `fields`, `active`, `created_at`, `updated_at`) VALUES ('login-form', 'Test Form', 'Submit', '/api/v1/auth/login', 'POST', '[{\"name\":\"email\",\"label\":\"Email\",\"type\":\"email\",\"required\":true,\"order\":1}]', TRUE, '2026-03-20 22:30:06.882039', '2026-03-20 22:30:06.882039') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/form_schemas/login-form" for 127.0.0.1 at 2026-03-20 22:30:06 +0000
+Processing by Api::V1::FormsController#show as HTML
+  Parameters: {"slug"=>"login-form"}
+  [1m[36mFormSchema Load (0.6ms)[0m  [1m[34mSELECT `form_schemas`.* FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' AND `form_schemas`.`active` = TRUE LIMIT 1[0m
+Completed 200 OK in 52ms (Views: 1.8ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormSchema Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' LIMIT 1[0m
+  [1m[36mFormSchema Create (0.7ms)[0m  [1m[32mINSERT INTO `form_schemas` (`slug`, `title`, `submit_label`, `submit_endpoint`, `submit_method`, `fields`, `active`, `created_at`, `updated_at`) VALUES ('login-form', 'Test Form', 'Submit', '/api/v1/auth/login', 'POST', '[{\"name\":\"email\",\"label\":\"Email\",\"type\":\"email\",\"required\":true,\"order\":1}]', TRUE, '2026-03-20 22:30:06.975185', '2026-03-20 22:30:06.975185') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/form_schemas/nonexistent" for 127.0.0.1 at 2026-03-20 22:30:06 +0000
+Processing by Api::V1::FormsController#show as HTML
+  Parameters: {"slug"=>"nonexistent"}
+  [1m[36mFormSchema Load (0.5ms)[0m  [1m[34mSELECT `form_schemas`.* FROM `form_schemas` WHERE `form_schemas`.`slug` = 'nonexistent' AND `form_schemas`.`active` = TRUE LIMIT 1[0m
+Completed 404 Not Found in 8ms (Views: 1.0ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormSchema Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' LIMIT 1[0m
+  [1m[36mFormSchema Create (0.5ms)[0m  [1m[32mINSERT INTO `form_schemas` (`slug`, `title`, `submit_label`, `submit_endpoint`, `submit_method`, `fields`, `active`, `created_at`, `updated_at`) VALUES ('login-form', 'Test Form', 'Submit', '/api/v1/auth/login', 'POST', '[{\"name\":\"email\",\"label\":\"Email\",\"type\":\"email\",\"required\":true,\"order\":1}]', TRUE, '2026-03-20 22:30:07.008531', '2026-03-20 22:30:07.008531') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/form_schemas" for 127.0.0.1 at 2026-03-20 22:30:07 +0000
+Processing by Api::V1::FormsController#create as HTML
+Filter chain halted as :authenticate_request! rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'admin' LIMIT 1[0m
+  [1m[36mRole Create (1.2ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Administrador', 'admin', 'Doloremque quia quia tempore.', TRUE, '2026-03-20 22:30:07.082708', '2026-03-20 22:30:07.082708') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPermission Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'roles' AND `permissions`.`action` = 'read' LIMIT 1[0m
+  [1m[36mPermission Create (0.5ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('roles', 'read', NULL, '2026-03-20 22:30:07.110308', '2026-03-20 22:30:07.110308') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'reader-role' LIMIT 1[0m
+  [1m[36mRole Create (1.2ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Lead Legal Architect', 'reader-role', 'Voluptatem reprehenderit omnis dolores.', TRUE, '2026-03-20 22:30:07.128482', '2026-03-20 22:30:07.128482') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRolePermission Create (2.5ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (16, 8, '2026-03-20 22:30:07.147594', '2026-03-20 22:30:07.147594') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'selena@feil.test' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('selena@feil.test', '$2a$12$cmoZDofrFRZUtHkYjoVZVuTkNQp/zkgNtXQNcZy51oLcJkRQOJq8a', 'Amb. Dominique Windler', NULL, NULL, NULL, '2026-03-20 22:30:07.405449', '2026-03-20 22:30:07.405449', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserRole Create (1.2ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (35, 16, NULL, '2026-03-20 22:30:07.410911', '2026-03-20 22:30:07.410911') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (1.6ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 35 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:30:07.420060')[0m
+Started GET "/api/v1/roles" for 127.0.0.1 at 2026-03-20 22:30:07 +0000
+Processing by Api::V1::RolesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 35 LIMIT 1[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE[0m
+  [1m[36mRolePermission Load (6.2ms)[0m  [1m[34mSELECT `role_permissions`.* FROM `role_permissions` WHERE `role_permissions`.`role_id` IN (15, 16)[0m
+  [1m[36mPermission Load (0.5ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`id` = 8[0m
+Completed 500 Internal Server Error in 74ms (Views: 0.2ms | ActiveRecord: 7.5ms (4 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'admin' LIMIT 1[0m
+  [1m[36mRole Create (1.0ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Administrador', 'admin', 'Voluptatem et odit dicta.', TRUE, '2026-03-20 22:30:07.547547', '2026-03-20 22:30:07.547547') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'daria.vandervort@jenkins-kohler.test' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('daria.vandervort@jenkins-kohler.test', '$2a$12$DpeuzO0XPtbtNg7dkDhjL.MiSIoOIjMb.N1FZRgKziN.lVE/cbSPy', 'Nicky Effertz', NULL, NULL, NULL, '2026-03-20 22:30:07.798895', '2026-03-20 22:30:07.798895', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (0.9ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 36 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:30:07.803935')[0m
+Started GET "/api/v1/roles" for 127.0.0.1 at 2026-03-20 22:30:07 +0000
+Processing by Api::V1::RolesController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 36 LIMIT 1[0m
+Completed 403 Forbidden in 5ms (Views: 1.5ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'admin' LIMIT 1[0m
+  [1m[36mRole Create (0.4ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Administrador', 'admin', 'Eum assumenda harum ab.', TRUE, '2026-03-20 22:30:07.847028', '2026-03-20 22:30:07.847028') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/roles" for 127.0.0.1 at 2026-03-20 22:30:07 +0000
+Processing by Api::V1::RolesController#index as HTML
+Filter chain halted as :authenticate_request! rendered or redirected
+Completed 401 Unauthorized in 5ms (Views: 1.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('new@example.com', '$2a$12$YHYnAlK12C5oLmQapvxjCOuv6KWoCep/o/IxZNF43h1JEWv0CXB0u', 'Daniel', NULL, NULL, NULL, '2026-03-20 22:30:55.114092', '2026-03-20 22:30:55.114092', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 37 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Update (0.7ms)[0m  [1m[33mUPDATE `users` SET `users`.`refresh_token_hash` = '$2a$12$MOV7bc.Ev3MebSrr3M7.6efF9VqD3J328eafCjCj27TaNH7Vf0UaW', `users`.`refresh_token_expires_at` = '2026-04-19 22:30:55.367605', `users`.`updated_at` = '2026-03-20 22:30:55.391126' WHERE `users`.`id` = 37[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 37 LIMIT 1[0m
+  [1m[36mPermission Load (0.9ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 37 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:30:55.536755')[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 37 LIMIT 1[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('new@example.com', '$2a$12$AFkxpJWGX97Zw/W3epwBo.2zd4qhPQLY0yoy6NjPx1XAZNZVkEzJG', 'Nicky Lindgren', NULL, NULL, NULL, '2026-03-20 22:30:56.695652', '2026-03-20 22:30:56.695652', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (7.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRole Create (1.1ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Principal Administration Specialist', 'editor', 'Non a et corrupti.', TRUE, '2026-03-20 22:30:56.805643', '2026-03-20 22:30:56.805643') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'terrell@kub.example' LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('terrell@kub.example', '$2a$12$9tElHlo0uuLUgBGNmGXpweWnsDrV3ddHsNzOpudhqklnNw6Qw5TCq', 'Virgil Lynch', NULL, NULL, NULL, '2026-03-20 22:30:57.065276', '2026-03-20 22:30:57.065276', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE AND `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRolePermission Load (0.6ms)[0m  [1m[34mSELECT `role_permissions`.* FROM `role_permissions` WHERE `role_permissions`.`role_id` = 19[0m
+  [1m[36mUserRole Load (0.4ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 39 AND `user_roles`.`role_id` = 19 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 39 LIMIT 1[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`id` = 19 LIMIT 1[0m
+  [1m[36mUserRole Create (0.5ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (39, 19, NULL, '2026-03-20 22:30:57.182406', '2026-03-20 22:30:57.182406') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUserRole Load (0.4ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 39 AND `user_roles`.`role_id` = 19 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRole Create (0.4ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Product Advertising Technician', 'editor', 'Facere occaecati mollitia et.', TRUE, '2026-03-20 22:30:57.205028', '2026-03-20 22:30:57.205028') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'tanisha.hand@schroeder.test' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('tanisha.hand@schroeder.test', '$2a$12$qmo0g7Koxuu2rX2H70DWC.I.qRj1wrAZAvIStB75hsBuKyahzR5F2', 'Truman Carter', NULL, NULL, NULL, '2026-03-20 22:30:57.445914', '2026-03-20 22:30:57.445914', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE AND `roles`.`slug` = 'missing' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRole Create (0.3ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Manufacturing Administrator', 'editor', 'Labore et consectetur qui.', TRUE, '2026-03-20 22:30:57.462129', '2026-03-20 22:30:57.462129') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'jerrod_streich@gleichner.example' LIMIT 1[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('jerrod_streich@gleichner.example', '$2a$12$sjRN6WT6ubTV/na9wE90ReEUPaVsFU9.FF.CDir3xP6HsRz5Wmbuu', 'Damion Strosin', NULL, NULL, NULL, '2026-03-20 22:30:57.700425', '2026-03-20 22:30:57.700425', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE AND `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRolePermission Load (0.7ms)[0m  [1m[34mSELECT `role_permissions`.* FROM `role_permissions` WHERE `role_permissions`.`role_id` = 21[0m
+  [1m[36mUserRole Load (0.9ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 41 AND `user_roles`.`role_id` = 21 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 41 LIMIT 1[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`id` = 21 LIMIT 1[0m
+  [1m[36mUserRole Create (0.4ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (41, 21, NULL, '2026-03-20 22:30:57.752608', '2026-03-20 22:30:57.752608') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUserRole Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `user_roles`[0m
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE AND `roles`.`slug` = 'editor' LIMIT 1[0m
+  [1m[36mRolePermission Load (0.6ms)[0m  [1m[34mSELECT `role_permissions`.* FROM `role_permissions` WHERE `role_permissions`.`role_id` = 21[0m
+  [1m[36mUserRole Load (0.7ms)[0m  [1m[34mSELECT `user_roles`.* FROM `user_roles` WHERE `user_roles`.`user_id` = 41 AND `user_roles`.`role_id` = 21 LIMIT 1[0m
+  [1m[36mUserRole Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `user_roles`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPermission Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'read' LIMIT 1[0m
+  [1m[36mPermission Create (1.1ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'read', NULL, '2026-03-20 22:30:57.842409', '2026-03-20 22:30:57.842409') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'role-1' LIMIT 1[0m
+  [1m[36mRole Create (0.6ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Senior Healthcare Administrator', 'role-1', 'Beatae repudiandae ipsam consequatur.', TRUE, '2026-03-20 22:30:57.856382', '2026-03-20 22:30:57.856382') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRolePermission Create (1.9ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (22, 9, '2026-03-20 22:30:57.872354', '2026-03-20 22:30:57.872354') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (3.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'johnette_grady@oberbrunner.example' LIMIT 1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('johnette_grady@oberbrunner.example', '$2a$12$RFOLxiGrszmXm4T4Issvmu7tMaQHWQ2QOWQBe5StX.v0Y.yWUYtuq', 'Arron Heathcote', NULL, NULL, NULL, '2026-03-20 22:30:58.113044', '2026-03-20 22:30:58.113044', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserRole Create (1.3ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (42, 22, NULL, '2026-03-20 22:30:58.127580', '2026-03-20 22:30:58.127580') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (2.0ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 42 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:30:58.138550')[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPermission Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'read' LIMIT 1[0m
+  [1m[36mPermission Create (1.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'read', NULL, '2026-03-20 22:30:58.169207', '2026-03-20 22:30:58.169207') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'sung.davis@steuber.test' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('sung.davis@steuber.test', '$2a$12$EPk0XnorD14vSLe.vDarkOzxEcOFSWLH7jmUc2rs28Wu0Cwr1P5Ji', 'Eliz Batz', NULL, NULL, NULL, '2026-03-20 22:30:58.408914', '2026-03-20 22:30:58.408914', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (1.5ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 43 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:30:58.411710')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPermission Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'users' AND `permissions`.`action` = 'read' LIMIT 1[0m
+  [1m[36mPermission Create (0.6ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('users', 'read', NULL, '2026-03-20 22:30:58.425075', '2026-03-20 22:30:58.425075') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'role-2' LIMIT 1[0m
+  [1m[36mRole Create (0.6ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Internal Community-Services Representative', 'role-2', 'Soluta quae qui ut.', TRUE, '2026-03-20 22:30:58.435509', '2026-03-20 22:30:58.435509') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRolePermission Create (1.0ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (23, 11, '2026-03-20 22:30:58.440698', '2026-03-20 22:30:58.440698') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'alphonso@stehr.test' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('alphonso@stehr.test', '$2a$12$UWVDUnNzxeMAIFeqLzqHvu/FPFZUpZnyErwu2Ccgv/4D7SQ8wj8hq', 'Milissa Dickinson', NULL, NULL, NULL, '2026-03-20 22:30:58.658336', '2026-03-20 22:30:58.658336', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserRole Create (1.1ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (44, 23, '2026-03-19 22:30:58.660508', '2026-03-20 22:30:58.664073', '2026-03-20 22:30:58.664073') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (1.2ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 44 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:30:58.668756')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'lisette.barrows@mcdermott.test' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('lisette.barrows@mcdermott.test', '$2a$12$uf.Zr4.P3l1krMH8LQzTnOE7nO8vtNoEifnXQbcxxAl7jLnChVrv2', 'Alejandra Veum', NULL, NULL, NULL, '2026-03-20 22:30:58.896376', '2026-03-20 22:30:58.896376', TRUE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'kori.weissnat@davis.test' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('kori.weissnat@davis.test', '$2a$12$1TLD7Ps5pO9yGQysNKg3ke/W1mXw8itc9.4Qg.tO9J/UYs8IYFAlG', 'Kitty Hyatt', NULL, NULL, NULL, '2026-03-20 22:30:59.117852', '2026-03-20 22:30:59.117852', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'herman.larson@beahan-deckow.test' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('herman.larson@beahan-deckow.test', '$2a$12$6fQiGjMQfyVpc85mlOiT6uDRGLAng0UHiy9QDUVQXo/93gMsxEHXy', 'Joeann Lindgren', NULL, NULL, NULL, '2026-03-20 22:30:59.345458', '2026-03-20 22:30:59.345458', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'evan_schroeder@ledner-reilly.test' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('evan_schroeder@ledner-reilly.test', '$2a$12$PwTs0U4wWP34j0y8Rk5EmOf/Ks/DFQkKLhzyCVeDuyrH.XVNm6yO6', 'Pres. Dennise Lowe', NULL, NULL, NULL, '2026-03-20 22:30:59.569547', '2026-03-20 22:30:59.569547', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'louella@crist.test' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('louella@crist.test', '$2a$12$f3XYT/2YtW9t3lyX5NO2iezgRcDJRQrFF8HLB58Dv4..smKqp0zt2', 'The Hon. Salvador Gottlieb', NULL, NULL, NULL, '2026-03-20 22:30:59.800778', '2026-03-20 22:30:59.800778', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'ozie@mayer-dickinson.test' LIMIT 1[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('ozie@mayer-dickinson.test', '$2a$12$a/rdnCEF8alMm2irTRbgjupToP9BmSspBsqHbWHZmVPetfW0dsyeS', 'Angel Sauer', NULL, NULL, NULL, '2026-03-20 22:31:00.023737', '2026-03-20 22:31:00.023737', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/auth/register" for 127.0.0.1 at 2026-03-20 22:31:00 +0000
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "name"=>"Daniel"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'new@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('new@example.com', '$2a$12$2vFvybrhB5Ha7akXdMnoE.GHjjBt8dZf32JVb29Yrlx2v65z.7fSC', 'Daniel', NULL, NULL, NULL, '2026-03-20 22:31:00.384313', '2026-03-20 22:31:00.384313', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 51 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Update (2.0ms)[0m  [1m[33mUPDATE `users` SET `users`.`refresh_token_hash` = '$2a$12$3FvQuXNHZzpuvm0eoUdDL.TANAyugpQBMqY.gQk6v3yDEcEbo/Z0q', `users`.`refresh_token_expires_at` = '2026-04-19 22:31:00.604835', `users`.`updated_at` = '2026-03-20 22:31:00.612858' WHERE `users`.`id` = 51[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 51 LIMIT 1[0m
+  [1m[36mPermission Load (0.9ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 51 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:31:00.651358')[0m
+  [1m[36mCACHE User Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 51 LIMIT 1[0m
+Completed 201 Created in 522ms (Views: 0.4ms | ActiveRecord: 7.7ms (8 queries, 1 cached) | GC: 29.9ms)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'existing@example.com' LIMIT 1[0m
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('existing@example.com', '$2a$12$oMu8Pur/2dkv7taEJ0RVsOFlVpZlSWbauR0WPAqTcF3pWtZyHTWjW', 'Rickie Littel', NULL, NULL, NULL, '2026-03-20 22:31:00.895138', '2026-03-20 22:31:00.895138', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/auth/register" for 127.0.0.1 at 2026-03-20 22:31:00 +0000
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "name"=>"Daniel"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'existing@example.com' LIMIT 1[0m
+Completed 422 Unprocessable Content in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormSchema Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' LIMIT 1[0m
+  [1m[36mFormSchema Create (1.4ms)[0m  [1m[32mINSERT INTO `form_schemas` (`slug`, `title`, `submit_label`, `submit_endpoint`, `submit_method`, `fields`, `active`, `created_at`, `updated_at`) VALUES ('login-form', 'Test Form', 'Submit', '/api/v1/auth/login', 'POST', '[{\"name\":\"email\",\"label\":\"Email\",\"type\":\"email\",\"required\":true,\"order\":1}]', TRUE, '2026-03-20 22:31:00.971395', '2026-03-20 22:31:00.971395') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/form_schemas/login-form" for 127.0.0.1 at 2026-03-20 22:31:00 +0000
+Processing by Api::V1::FormsController#show as HTML
+  Parameters: {"slug"=>"login-form"}
+  [1m[36mFormSchema Load (0.4ms)[0m  [1m[34mSELECT `form_schemas`.* FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' AND `form_schemas`.`active` = TRUE LIMIT 1[0m
+Completed 200 OK in 21ms (Views: 1.5ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormSchema Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' LIMIT 1[0m
+  [1m[36mFormSchema Create (0.7ms)[0m  [1m[32mINSERT INTO `form_schemas` (`slug`, `title`, `submit_label`, `submit_endpoint`, `submit_method`, `fields`, `active`, `created_at`, `updated_at`) VALUES ('login-form', 'Test Form', 'Submit', '/api/v1/auth/login', 'POST', '[{\"name\":\"email\",\"label\":\"Email\",\"type\":\"email\",\"required\":true,\"order\":1}]', TRUE, '2026-03-20 22:31:01.023774', '2026-03-20 22:31:01.023774') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/form_schemas/nonexistent" for 127.0.0.1 at 2026-03-20 22:31:01 +0000
+Processing by Api::V1::FormsController#show as HTML
+  Parameters: {"slug"=>"nonexistent"}
+  [1m[36mFormSchema Load (0.5ms)[0m  [1m[34mSELECT `form_schemas`.* FROM `form_schemas` WHERE `form_schemas`.`slug` = 'nonexistent' AND `form_schemas`.`active` = TRUE LIMIT 1[0m
+Completed 404 Not Found in 4ms (Views: 0.4ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFormSchema Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `form_schemas` WHERE `form_schemas`.`slug` = 'login-form' LIMIT 1[0m
+  [1m[36mFormSchema Create (0.9ms)[0m  [1m[32mINSERT INTO `form_schemas` (`slug`, `title`, `submit_label`, `submit_endpoint`, `submit_method`, `fields`, `active`, `created_at`, `updated_at`) VALUES ('login-form', 'Test Form', 'Submit', '/api/v1/auth/login', 'POST', '[{\"name\":\"email\",\"label\":\"Email\",\"type\":\"email\",\"required\":true,\"order\":1}]', TRUE, '2026-03-20 22:31:01.046142', '2026-03-20 22:31:01.046142') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/form_schemas" for 127.0.0.1 at 2026-03-20 22:31:01 +0000
+Processing by Api::V1::FormsController#create as HTML
+Filter chain halted as :authenticate_request! rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'admin' LIMIT 1[0m
+  [1m[36mRole Create (2.9ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Administrador', 'admin', 'Ullam labore et possimus.', TRUE, '2026-03-20 22:31:01.083307', '2026-03-20 22:31:01.083307') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPermission Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `permissions` WHERE `permissions`.`resource` = 'roles' AND `permissions`.`action` = 'read' LIMIT 1[0m
+  [1m[36mPermission Create (0.4ms)[0m  [1m[32mINSERT INTO `permissions` (`resource`, `action`, `description`, `created_at`, `updated_at`) VALUES ('roles', 'read', NULL, '2026-03-20 22:31:01.096774', '2026-03-20 22:31:01.096774') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'reader-role' LIMIT 1[0m
+  [1m[36mRole Create (0.4ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Forward Administration Engineer', 'reader-role', 'At possimus vel consequatur.', TRUE, '2026-03-20 22:31:01.103930', '2026-03-20 22:31:01.103930') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRolePermission Create (0.9ms)[0m  [1m[32mINSERT INTO `role_permissions` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES (25, 12, '2026-03-20 22:31:01.111771', '2026-03-20 22:31:01.111771') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'conrad@kertzmann.test' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('conrad@kertzmann.test', '$2a$12$flGSWjzL1bNpmcYCELFli.Ai1aO9VGoxHLAoG9unjp6axEGhQ6fou', 'Jerold Dooley', NULL, NULL, NULL, '2026-03-20 22:31:01.337276', '2026-03-20 22:31:01.337276', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserRole Create (1.0ms)[0m  [1m[32mINSERT INTO `user_roles` (`user_id`, `role_id`, `expires_at`, `created_at`, `updated_at`) VALUES (53, 25, NULL, '2026-03-20 22:31:01.341522', '2026-03-20 22:31:01.341522') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (0.8ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 53 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:31:01.345883')[0m
+Started GET "/api/v1/roles" for 127.0.0.1 at 2026-03-20 22:31:01 +0000
+Processing by Api::V1::RolesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 53 LIMIT 1[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`active` = TRUE[0m
+  [1m[36mRolePermission Load (0.5ms)[0m  [1m[34mSELECT `role_permissions`.* FROM `role_permissions` WHERE `role_permissions`.`role_id` IN (24, 25)[0m
+  [1m[36mPermission Load (0.4ms)[0m  [1m[34mSELECT `permissions`.* FROM `permissions` WHERE `permissions`.`id` = 12[0m
+Completed 200 OK in 34ms (Views: 0.1ms | ActiveRecord: 1.9ms (4 queries, 0 cached) | GC: 0.2ms)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'admin' LIMIT 1[0m
+  [1m[36mRole Create (0.3ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Administrador', 'admin', 'Cumque ipsum pariatur modi.', TRUE, '2026-03-20 22:31:01.414842', '2026-03-20 22:31:01.414842') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'mina.legros@moore.example' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `refresh_token_hash`, `refresh_token_expires_at`, `confirmed_at`, `created_at`, `updated_at`, `super_admin`) VALUES ('mina.legros@moore.example', '$2a$12$Mx12A3Xuap8SOGBv.UY4p.f0EbGuNvDEqO4HaLlnTEFng3lFionw6', 'Jonelle Parker', NULL, NULL, NULL, '2026-03-20 22:31:01.632362', '2026-03-20 22:31:01.632362', FALSE) RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPermission Load (1.0ms)[0m  [1m[34mSELECT DISTINCT `permissions`.* FROM `permissions` INNER JOIN `role_permissions` ON `role_permissions`.`permission_id` = `permissions`.`id` INNER JOIN `roles` ON `roles`.`id` = `role_permissions`.`role_id` INNER JOIN `user_roles` ON `user_roles`.`role_id` = `roles`.`id` WHERE `user_roles`.`user_id` = 54 AND (user_roles.expires_at IS NULL OR user_roles.expires_at > '2026-03-20 22:31:01.635330')[0m
+Started GET "/api/v1/roles" for 127.0.0.1 at 2026-03-20 22:31:01 +0000
+Processing by Api::V1::RolesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 54 LIMIT 1[0m
+Completed 403 Forbidden in 2ms (Views: 0.3ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRole Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `roles` WHERE `roles`.`slug` = 'admin' LIMIT 1[0m
+  [1m[36mRole Create (0.4ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `slug`, `description`, `active`, `created_at`, `updated_at`) VALUES ('Administrador', 'admin', 'Aut eaque beatae est.', TRUE, '2026-03-20 22:31:01.659686', '2026-03-20 22:31:01.659686') RETURNING `id`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/roles" for 127.0.0.1 at 2026-03-20 22:31:01 +0000
+Processing by Api::V1::RolesController#index as HTML
+Filter chain halted as :authenticate_request! rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 1.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
