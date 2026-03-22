@@ -15,25 +15,28 @@ export const AppLayout = ({ title, children }: { title: string; children: ReactN
         <div className={styles.sidebarPanel}>
           <p className={styles.sidebarLabel}>Navegacion</p>
           <nav className={styles.nav}>
-            <NavLink to="/dashboard" className={getNavClassName}>
-              Dashboard
+            <NavLink to="/events" className={getNavClassName}>
+              ☕ Parches
+            </NavLink>
+            <NavLink to="/my-events" className={getNavClassName}>
+              📋 Mis parches
             </NavLink>
             <NavLink to="/profile" className={getNavClassName}>
               Mi perfil
             </NavLink>
-            <PermissionGate permission="users:read">
-              <NavLink to="/admin/users" className={getNavClassName}>
-                Usuarios
+            <PermissionGate permission="events:create">
+              <NavLink to="/admin/events" className={getNavClassName}>
+                🎉 Gestionar eventos
               </NavLink>
             </PermissionGate>
-            <PermissionGate permission="roles:read">
-              <NavLink to="/admin/roles" className={getNavClassName}>
-                Roles
+            <PermissionGate permission="enrollments:verify">
+              <NavLink to="/admin/enrollments" className={getNavClassName}>
+                ✅ Inscripciones
               </NavLink>
             </PermissionGate>
-            <PermissionGate permission="forms:read">
-              <NavLink to="/admin/forms" className={getNavClassName}>
-                Formularios
+            <PermissionGate permission="partners:read">
+              <NavLink to="/admin/partners" className={getNavClassName}>
+                🤝 Aliados
               </NavLink>
             </PermissionGate>
           </nav>
