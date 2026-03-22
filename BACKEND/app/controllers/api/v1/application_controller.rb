@@ -2,6 +2,7 @@ module Api
   module V1
     class ApplicationController < ::ApplicationController
       include Authorizable
+      include RequireOnboarding
 
       before_action :authenticate_request!
 

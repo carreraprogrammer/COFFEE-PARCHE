@@ -27,6 +27,7 @@ Rails.application.configure do
   config.cache_store = :memory_store
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
+  config.active_storage.service = :local_minio
 
   # Don't care if the mailer can't send.
 

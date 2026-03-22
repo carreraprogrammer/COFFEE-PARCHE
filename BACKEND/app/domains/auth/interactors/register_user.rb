@@ -10,6 +10,10 @@ module Auth
         raise Auth::Errors::InvalidEmail, "Email already taken" if @repo.find_by_email(email_vo)
         encrypted = BCrypt::Password.create(password_vo.raw)
         user = @repo.create(email: email_vo, name: name, encrypted_password: encrypted)
+        Authorization::Interactors::AssignRoleToUser.new.call(
+          user_id: user.id,
+          role_slug: 'participant'
+        )
         tokens = issue_tokens(user)
         EventBus.publish(Auth::Events::UserRegistered.new(user_id: user.id, email: user.email))
         { user: @repo.find_by_id(user.id), **tokens }
